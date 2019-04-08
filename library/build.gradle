@@ -1,0 +1,90 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.novoda.bintray-release'//添加
+
+android {
+    compileSdkVersion 27
+    resourcePrefix "library__"    //这个随便填
+
+
+    defaultConfig {
+        minSdkVersion 15
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                includeCompileClasspath false
+            }
+        }
+
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+
+
+    packagingOptions {
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/INDEX.LIST'
+    }
+
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    testImplementation 'junit:junit:4.12'
+    testImplementation 'org.mockito:mockito-all:1.10.19'
+    implementation 'com.android.support:appcompat-v7:27.1.1'
+    implementation 'com.android.support:recyclerview-v7:27.1.1'
+    androidTestImplementation 'com.android.support:support-annotations:28.0.0'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    //view 注解
+    implementation 'com.jakewharton:butterknife:8.7.0'
+    annotationProcessor "com.jakewharton:butterknife-compiler:8.7.0"
+    //RxJava、RxAndroid
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    implementation 'io.reactivex.rxjava2:rxjava:2.1.0'
+    //Gson
+    implementation 'com.google.code.gson:gson:2.8.2'
+    //本地数据库
+    api 'org.litepal.android:core:2.0.0'
+    //网络请求框架okhttp + retrofit
+    implementation 'com.squareup.okhttp3:okhttp:3.11.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.4.1'
+    implementation 'com.squareup.okio:okio:1.14.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.1.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.1.0'
+    implementation 'com.squareup.retrofit2:converter-scalars:2.1.0'
+    implementation 'com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0'
+    //依赖注入
+    api 'com.google.dagger:dagger:2.5'
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.5'
+    //事件分发
+    api 'com.hanzhifengyun:rxbus:1.0.0'
+    //图片加载
+    implementation 'com.github.bumptech.glide:glide:4.7.1'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.7.1'
+    //动态权限请求
+    implementation 'pub.devrel:easypermissions:0.3.0'
+}
+
+//添加
+publish {
+    userOrg = 'hanzhifengyun'//bintray.com用户名
+    groupId = 'com.hanzhifengyun'//jcenter上的路径
+    artifactId = 'library'//项目名称
+    publishVersion = '0.0.1-TEST'//版本号
+    desc = 'library for Android'//描述，不重要
+    website = 'https://github.com/hanzhifengyun/library'
+}

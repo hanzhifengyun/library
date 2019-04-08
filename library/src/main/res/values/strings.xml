@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">library</string>
+
+
+    <string name="network_failure">网络连接错误</string>
+    <string name="data_parse_error">数据解析错误</string>
+</resources>
